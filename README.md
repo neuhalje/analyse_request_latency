@@ -19,24 +19,28 @@ A set of constants allows for some configuration:
 COMMAND_FILTER=None
 #COMMAND_FILTER="operation_G"
 
+
 # None: all
 # Take a sample for visualisation
 MAX_ELEMENT_COUNT=None   # I strongly advise against more than 100k elements (performance)
 
-MAX_ELEMENT_COUNT=10_000
+MAX_ELEMENT_COUNT=100_000
 
 # set any outliers that take longer than `PERCENTILE_LIMIT` percent of the calls to this ceiling
-# this removes outliers. Will never be higher than SECONDS_LIMIT
+# this removes outliers. Will never be higher than DURATION_LIMIT
 PERCENTILE_LIMIT=0.999
-SECONDS_LIMIT=60
+DURATION_LIMIT=60  # unit: the same unit as used in the data files
 
 # https://pandas.pydata.org/pandas-docs/stable/timeseries.html#timeseries-offset-aliases
-#ROUND_TO="15min"
+ROUND_TO="15min"
 #ROUND_TO="6H"
-ROUND_TO="1min"
+#ROUND_TO="1min"
+
+# The unit of the duration column - only used in labeling charts
+DURATION_UNIT = "s"
 
 _DATASET_SMALL="example_dataset.txt"
-_DATASET_LARGE="combined-sorted.txt"
+_DATASET_LARGE="../combined-sorted.txt"
 
 DATASET=_DATASET_SMALL
 ```
@@ -50,7 +54,7 @@ The example dataset is split into the following columns:
 | Timestamp  | timestamp  | Occurence of the request  |
 | URL  | string | URL of the request (ignored!)  |
 | command  | string  | The command executed. This is the grouping criteria for analysis.  |
-| duration_s  | int  | Duration (in seconds) of the request.  |
+| duration  | int  | Duration  of the request.  |
 
 ```csv
 14/Jan/2019:03:46:03 /example/url operation_G 0
