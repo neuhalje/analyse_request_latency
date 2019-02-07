@@ -16,13 +16,20 @@ A set of constants allows for some configuration:
 
 ```python
 # None: all, any other value: just this operation
-COMMAND_FILTER=None
-#COMMAND_FILTER="operation_G"
+QUERY_FILTER=None
+
+# Filter for all commands named 'myCommand'
+#QUERY_FILTER="command == 'myCommand'"
+
+# Do some more elaborated filtering in Python
+# E.g. all commands that do not include 'G' and whose URL starts with ''/example'
+QUERY_FILTER=lambda df : np.logical_not(df.command.str.match('.*G.*')) & df.url.str.match(r'^/example')
+#QUERY_FILTER=lambda df : np.logical_not(df.url.str.match('.*Lazy.*'))
 
 
 # None: all
 # Take a sample for visualisation
-MAX_ELEMENT_COUNT=None   # I strongly advise against more than 100k elements (performance)
+# MAX_ELEMENT_COUNT=None   # I strongly advise against more than 100k elements (performance)
 
 MAX_ELEMENT_COUNT=100_000
 
@@ -34,15 +41,13 @@ DURATION_LIMIT=60  # unit: the same unit as used in the data files
 # https://pandas.pydata.org/pandas-docs/stable/timeseries.html#timeseries-offset-aliases
 ROUND_TO="15min"
 #ROUND_TO="6H"
-#ROUND_TO="1min"
 
 # The unit of the duration column - only used in labeling charts
 DURATION_UNIT = "s"
 
-_DATASET_SMALL="example_dataset.txt"
-_DATASET_LARGE="../combined-sorted.txt"
+_DATASET="example_dataset.txt"
 
-DATASET=_DATASET_SMALL
+DATASET=_DATASET
 ```
 
 ## Data format
