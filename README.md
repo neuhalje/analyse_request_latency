@@ -2,7 +2,7 @@
 
 Analyse (a custom formated) http-request log for request duration.
 
-Start with `jupyter notebook`.
+Start with `pipenv run jupyter notebook`.
 
 ## Example
 
@@ -80,6 +80,6 @@ Look for where the dataset is read and where it is converted (parsing of the tim
 
 # Installation
 
-`pip3 install scipy plotly pandas matplotlib seaborn`
-
+* Install `pipenv`
+* `pipenv install`
 
